@@ -206,13 +206,13 @@ void handle_UDP (u_char *args,const struct pcap_pkthdr* pkthdr,const u_char* pac
     // define/compute udp header offset
     udp = (struct crude_udp*)(packet + SIZE_ETHERNET + size_ip);
     //full_udp_size = udp_length
-    full_udp_size = ntohs(udp->uh_ulen); //length is in bytes
+    int full_udp_size = ntohs(udp->uh_ulen); //length is in bytes
     //src_port = 2 bytes
     //dst_port = 2 bytes
     //checksum = 2 bytes
     //data = full_udp_size - src_port - dst_port - checksum - length
     size_udp = (2*2) + 2 + 2;//(src_port + dst_port) + checksum + length. szie of UDP header
-    num_bytes_udp_data = full_udp_size - size_udp; //number of bytes in data of UDP packet
+    int num_bytes_udp_data = full_udp_size - size_udp; //number of bytes in data of UDP packet
 
     payload = (u_char *)(packet + SIZE_ETHERNET + size_ip + size_udp);
 
@@ -226,7 +226,7 @@ void handle_UDP (u_char *args,const struct pcap_pkthdr* pkthdr,const u_char* pac
     if (size_payload > 0) 
 	{
         printf("   Payload (%d bytes):\n", size_payload);
-        print_payload (payload, size_payload);
+		print_payload (payload, size_payload);
     }
 }
 

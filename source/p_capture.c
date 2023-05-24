@@ -35,6 +35,10 @@ void pkt_handler_one(u_char *args, const struct pcap_pkthdr* header, const u_cha
 void udp_handler(u_char *args, const struct pcap_pkthdr *header, const u_char *packet);
 void print_pkt_info(const u_char *pkt, struct pcap_pkthdr pkt_header);
 
+/*To compile:
+gcc p_capture.c -lpcap -o sniffer
+*/
+
 int main(int argc, char *argv[])
 {
     /*Initiating members*/
@@ -61,7 +65,7 @@ int main(int argc, char *argv[])
     }
 
     /*Determine network number (IP) and netmask number (subnet)*/
-    if (pcap_lookupnet(dev, &net, &mask, errbuf) == -1) {
+    if (pcap_lookupnet(dev, &net, &mask, error_buffer) == -1) {
 	    fprintf(stderr, "Can't get netmask for device %s\n", dev);
 	    net = 0;
 	    mask = 0;

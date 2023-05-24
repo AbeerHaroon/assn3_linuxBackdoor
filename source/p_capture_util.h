@@ -88,13 +88,10 @@ struct aman_tcp {
         #define TH_URG  0x20
         #define TH_ECE  0x40
         #define TH_CWR  0x80
-        #defi#define SIZE_ETHERNET 14
-
-
-// tcpdump header (ether.h) defines ETHER_HDRLEN) 
-#ifndef ETHER_HDRLEN 
-#define ETHER_HDRLEN 14
-#endifrt th_urp;                 /* urgent pointer */
+        #define TH_FLAGS        (TH_FIN|TH_SYN|TH_RST|TH_ACK|TH_URG|TH_ECE|TH_CWR)
+        u_short th_win;                 /* window */
+        u_short th_sum;                 /* checksum */
+        u_short th_urp;                 /* urgent pointer */
 };
 
 /* UDP header structure copied from tcpdump source
